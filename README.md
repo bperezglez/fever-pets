@@ -1,3 +1,9 @@
+## v0.1.0
+- [x] Folder structure.
+- [x] Pets module.
+- [x] List pets.
+- [x] Sort pets.
+
 ## v0.0.0
 - [x] Skeleton Angular 9.
 

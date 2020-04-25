@@ -1,0 +1,5 @@
+<span (click)="sortable && onSort()" [ngClass]="{'sortable': sortable}">{{title}}<i class="fas" *ngIf="sortable" [ngClass]="{
+        'fa-sort': !order,
+        'fa-sort-down': order === 'desc',
+        'fa-sort-up': order === 'asc'
+    }"></i></span>

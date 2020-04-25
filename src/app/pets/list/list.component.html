@@ -1,0 +1,31 @@
+<div class="row" *ngIf="pets && pets.length > 0">
+    <h2>Fever Pets</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th *ngFor="let tableHeader of tableHeaders" scope="col">
+                    <fever-sortable [title]="tableHeader.title"
+                        [sortable]="tableHeader.sortable" [name]="tableHeader.name" [order]="tableHeader.order" (sorted)="handleSortedEvent($event)">
+                    </fever-sortable>
+                </th>
+                <!-- <th scope="col">Nombre<i class="fas"
+                    [ngClass]="{
+                        'fa-sort': !order,
+                        'fa-sort-down': order === 'desc',
+                        'fa-sort-up': order === 'asc'
+                    }"
+                    ></i></th> -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let pet of pets">
+                <td><img [src]="pet.photo_url" class="img-fluid" [alt]="pet.name"></td>
+                <td>{{pet.name}}</td>
+                <td>{{pet.kind}}</td>
+                <td>{{pet.weight}}</td>
+                <td>{{pet.height}}</td>
+                <td>{{pet.length}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
