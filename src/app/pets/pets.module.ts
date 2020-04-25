@@ -7,6 +7,7 @@ import { ListComponent } from './list/list.component';
 
 import { PetsRoutingModule } from './pets-routing.module';
 
+import { PaginationComponent } from './../shared/pagination/pagination.component';
 import { SortableComponent } from './../shared/sortable/sortable.component';
 
 
@@ -14,6 +15,7 @@ import { SortableComponent } from './../shared/sortable/sortable.component';
   declarations: [
     DetailComponent,
     ListComponent,
+    PaginationComponent,
     SortableComponent,
   ],
   imports: [

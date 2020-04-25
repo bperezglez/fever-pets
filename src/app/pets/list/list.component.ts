@@ -9,6 +9,7 @@ import { PetsService } from '../services/pets.service';
 export class ListComponent implements OnInit {
   tableHeaders: any;
   pets: Array<any>;
+  pagination: Object;
 
   constructor( private petsService: PetsService) {
     this.tableHeaders = [
@@ -55,12 +56,7 @@ export class ListComponent implements OnInit {
     this.getPets();
   }
   getPets(options = {}) {
-    this.petsService.getPets(options).subscribe(
-      (res) => {
-        const {response, linkHeader} = res;
-        this.pets = response;
-      }
-    )
+    this.petsService.getPetsList(options).subscribe(this.handleResponse.bind(this));
   }
   handleSortedEvent(event) {
     this.tableHeaders = this.tableHeaders.map(tableHeader => {
@@ -74,6 +70,14 @@ export class ListComponent implements OnInit {
     const pets = this.petsService.sortPets(event);
     console.log(pets)
     this.pets = pets;
+  }
+  handlePaginatedEvent(event) {
+    this.petsService.getPets({url: event.link}).subscribe(this.handleResponse.bind(this));
+  }
+  handleResponse(res) {
+    const {response, linkHeader} = res;
+    this.pets = response;
+    this.pagination = linkHeader;
   }
 
 }

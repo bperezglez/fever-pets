@@ -1,3 +1,8 @@
+## v0.2.0
+- [x] Pagination.
+- [x] Pagination component.
+- [x] Change service to navigate by url.
+
 ## v0.1.0
 - [x] Folder structure.
 - [x] Pets module.

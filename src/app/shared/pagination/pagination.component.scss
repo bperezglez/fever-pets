@@ -1,0 +1,11 @@
+.flex-end {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+.disabled {
+    pointer-events: none;
+}
+.disabled i {
+    color: #c9c7c7;
+}

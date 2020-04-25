@@ -16,18 +16,25 @@ export class PetsService {
 
   constructor(private http: HttpClient) { }
 
-  getPets(options: {page?: number, limit?: number}) {
+  getPetsList(options: {page?: number, limit?: number}) {
     let {page, limit} = options;
     page = page || DEFAULT_API_PAGE;
     limit = limit || DEFAULT_API_LIMIT;
+
+    const url = `${environment.API_URL}pets`
     const params = new HttpParams()
         .set('_page', page.toString())
         .set('_limit', limit.toString());
-    return this.http.get(`${environment.API_URL}`, {params, observe: 'response'})
+    return this.getPets({url, params});
+  }
+
+  getPets({url, params = {}}) {
+    return this.http.get(url, {params, observe: 'response'})
             .pipe(
               map((response: HttpResponse<any>) => {
-                const linkHeader = response.headers.get('Link');
+                const linkHeader = this.transformLinkToJson(response.headers.get('Link'));
                 this.pets = response.body;
+                console.log(linkHeader)
                 return {
                   response: response.body,
                   linkHeader,
@@ -35,6 +42,8 @@ export class PetsService {
               }),
             );
   }
+
+  
 
   sortPets({name, order}) {
     return this.pets.sort((a, b) => {
@@ -47,6 +56,18 @@ export class PetsService {
       }
       return 0;
     });
+  }
+
+  transformLinkToJson(links) {
+    const linksSplited = links.split(',');
+    const linkObj = {};
+    linksSplited.forEach((link) => {
+      let [url, name] = link.split(';');
+      url = url.replace(/<(.*)>/, '$1').trim();
+      name = name.replace(/rel="(.*)"/, '$1').trim();
+      linkObj[name] = url;
+    });
+    return linkObj;
   }
 
 }

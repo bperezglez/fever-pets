@@ -1,0 +1,16 @@
+<nav class="flex-end" aria-label="Page navigation example">
+    <ul class="pagination">
+        <li class="page-item page-link" (click)="pagination.first && onPaginationClick(pagination.first)" [ngClass]="{ 'disabled' : !pagination.first || !pagination.prev }">
+            <i class="fas fa-fast-backward"></i>
+        </li>
+        <li class="page-item page-link" (click)="pagination.prev && onPaginationClick(pagination.prev)" [ngClass]="{ 'disabled' : !pagination.prev }">
+            <i class="fas fa-backward"></i>
+        </li>
+        <li class="page-item page-link" (click)="pagination.next && onPaginationClick(pagination.next)" [ngClass]="{ 'disabled' : !pagination.next }">
+            <i class="fas fa-forward"></i>
+        </li>
+        <li class="page-item page-link" (click)="pagination.last && onPaginationClick(pagination.last)" [ngClass]="{ 'disabled' : !pagination.last || !pagination.next }">
+            <i class="fas fa-fast-forward"></i>
+        </li>
+    </ul>
+</nav>
