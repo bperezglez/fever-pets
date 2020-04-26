@@ -5,20 +5,13 @@
             <tr>
                 <th *ngFor="let tableHeader of tableHeaders" scope="col">
                     <fever-sortable [title]="tableHeader.title" [sortable]="tableHeader.sortable"
-                        [name]="tableHeader.name" [order]="tableHeader.order" (sorted)="handleSortedEvent($event)">
+                        [name]="tableHeader.name" [order]="by === tableHeader.name ? order : tableHeader.order" (sorted)="handleSortedEvent($event)">
                     </fever-sortable>
                 </th>
-                <!-- <th scope="col">Nombre<i class="fas"
-                    [ngClass]="{
-                        'fa-sort': !order,
-                        'fa-sort-down': order === 'desc',
-                        'fa-sort-up': order === 'asc'
-                    }"
-                    ></i></th> -->
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let pet of pets">
+            <tr *ngFor="let pet of pets" (click)="goToPetDetail(pet.id)">
                 <td><img [src]="pet.photo_url" class="img-fluid" [alt]="pet.name"></td>
                 <td>{{pet.name}}</td>
                 <td>{{pet.kind}}</td>

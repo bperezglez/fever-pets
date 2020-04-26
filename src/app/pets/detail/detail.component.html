@@ -1,1 +1,24 @@
-<p>detail works!</p>
+<a class="navbar-brand" (click)="getBack()">Volver</a>
+<div class="row" *ngIf="pet">
+    <div class="pet-container">
+        <div class="img-container">
+            <img [src]="pet.photo_url" alt="" class="img-thumbnail">
+        </div>
+        <dl class="dl-horizontal px-3">
+            <dt>Nombre</dt>
+            <dd>{{pet.name}}</dd>
+            <dt>Descripción</dt>
+            <dd>{{pet.description}}</dd>
+            <dt>Tipo</dt>
+            <dd>{{pet.kind}}</dd>
+            <dt>Peso</dt>
+            <dd>{{pet.weight}}</dd>
+            <dt>Altura</dt>
+            <dd>{{pet.height}}</dd>
+            <dt>Tamaño</dt>
+            <dd>{{pet.length}}</dd>
+            <dt>Salud</dt>
+            <dd>{{pet.health}}</dd>
+          </dl>
+    </div>
+</div>

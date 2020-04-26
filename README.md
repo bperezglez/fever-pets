@@ -1,3 +1,10 @@
+## v0.3.0
+- [x] Detail pet.
+- [x] Order and pagination by url.
+- [x] Calculate pet health.
+- [x] Unit test 81.73%.
+
+
 ## v0.2.0
 - [x] Pagination.
 - [x] Pagination component.

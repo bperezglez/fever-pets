@@ -1,83 +1,59 @@
 import { Component, OnInit } from '@angular/core';
 import { PetsService } from '../services/pets.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  styleUrls: ['./list.component.scss'],
 })
 export class ListComponent implements OnInit {
   tableHeaders: any;
   pets: Array<any>;
   pagination: Object;
+  by: String;
+  order: String;
 
-  constructor( private petsService: PetsService) {
-    this.tableHeaders = [
-      {
-        name: 'photo_url',
-        title: 'Imagen',
-        sortable: false,
-        order: null,
-      },
-      {
-        name: 'name',
-        title: 'Nombre',
-        sortable: true,
-        order: null,
-      },
-      {
-        name: 'kind',
-        title: 'Tipo',
-        sortable: true,
-        order: null,
-      },
-      {
-        name: 'weight',
-        title: 'Peso',
-        sortable: true,
-        order: null,
-      },
-      {
-        name: 'height',
-        title: 'Altura',
-        sortable: true,
-        order: null,
-      },
-      {
-        name: 'length',
-        title: 'Tamaño',
-        sortable: true,
-        order: null,
-      },
-    ]
-   }
+  constructor(
+    private petsService: PetsService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
+    this.tableHeaders = this.petsService.getDefaultTableHeaders();
+  }
 
   ngOnInit(): void {
-    this.getPets();
+    this.route.queryParams.subscribe((params) => {
+      this.by = params.by;
+      this.order = params.order;
+      this.getPets();
+    });
   }
-  getPets(options = {}) {
-    this.petsService.getPetsList(options).subscribe(this.handleResponse.bind(this));
+  getPets(options: any = this.route.snapshot.queryParams) {
+    this.petsService
+      .getPetsList(options)
+      .subscribe(this.handleResponse.bind(this));
   }
   handleSortedEvent(event) {
-    this.tableHeaders = this.tableHeaders.map(tableHeader => {
-      if (tableHeader.name !== event.name) {
-        tableHeader.order = null;
-      } else {
-        tableHeader.order = event.order;
-      }
-      return tableHeader;
-    });
-    const pets = this.petsService.sortPets(event);
-    console.log(pets)
-    this.pets = pets;
+    const { queryParams } = this.route.snapshot;
+    const order = event.order;
+    const by = event.name;
+
+    this.router.navigate(['/'], { queryParams: { ...queryParams, order, by } });
   }
   handlePaginatedEvent(event) {
-    this.petsService.getPets({url: event.link}).subscribe(this.handleResponse.bind(this));
+    const page = event.link.replace(/.*_page=(.*)?\&.*/, '$1');
+    const { queryParams } = this.route.snapshot;
+
+    this.router.navigate(['/'], { queryParams: { ...queryParams, page } });
   }
   handleResponse(res) {
-    const {response, linkHeader} = res;
+    const { response, linkHeader } = res;
     this.pets = response;
     this.pagination = linkHeader;
   }
 
+  goToPetDetail(id) {
+    this.router.navigate(['/pet', id]);
+  }
 }

@@ -5,6 +5,12 @@ import { PaginationComponent } from './pagination.component';
 describe('PaginationComponent', () => {
   let component: PaginationComponent;
   let fixture: ComponentFixture<PaginationComponent>;
+  const mockPagination = {
+    first: '',
+    prev: '',
+    next: '',
+    last: '',
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -16,6 +22,7 @@ describe('PaginationComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(PaginationComponent);
     component = fixture.componentInstance;
+    component.pagination = mockPagination;
     fixture.detectChanges();
   });
 
