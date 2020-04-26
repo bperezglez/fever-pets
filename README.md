@@ -1,3 +1,9 @@
+## v0.4.0
+- [x] Added pet number of lives.
+- [x] Pet of day.
+- [x] Change literals to en-EN.
+- [x] Unit test 92.71%.
+
 ## v0.3.0
 - [x] Detail pet.
 - [x] Order and pagination by url.

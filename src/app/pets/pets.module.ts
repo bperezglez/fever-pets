@@ -10,6 +10,7 @@ import { PetsRoutingModule } from './pets-routing.module';
 import { PaginationComponent } from './../shared/pagination/pagination.component';
 import { SortableComponent } from './../shared/sortable/sortable.component';
 
+import { PetDayComponent } from './../shared/pet-day/pet-day.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { SortableComponent } from './../shared/sortable/sortable.component';
     ListComponent,
     PaginationComponent,
     SortableComponent,
+    PetDayComponent,
   ],
   imports: [
     CommonModule,

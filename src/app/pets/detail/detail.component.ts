@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { PetsService } from '../services/pets.service';
 import { ActivatedRoute } from '@angular/router';
+import { LoadingService } from 'src/app/shared/loading/loading.service';
 
 @Component({
   selector: 'app-detail',
@@ -10,14 +11,15 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DetailComponent implements OnInit {
   pet: any;
-  constructor(private location: Location, private petsService: PetsService, private route: ActivatedRoute) {}
+  constructor(private location: Location, private petsService: PetsService, private route: ActivatedRoute,private loadingService: LoadingService) {}
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
+    this.loadingService.show();
     this.petsService.getPetById({id}).subscribe(petDetail => {
       this.pet = petDetail;
-    })
-    console.log(id)
+      this.loadingService.hide();
+    });
   }
 
   getBack() {

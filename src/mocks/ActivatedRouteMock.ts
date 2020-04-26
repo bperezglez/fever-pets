@@ -14,9 +14,6 @@ export default class ActivatedRouteMock {
       observer.complete();
     });
   }
-  set queryParams(queryParams) {
-    this._queryParams = queryParams;
-  }
   get paramMap() {
       return {
         get: this.getParamMap,

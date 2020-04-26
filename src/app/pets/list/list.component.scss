@@ -1,3 +1,14 @@
+.row {
+    flex-direction: row-reverse;
+}
+.pet-list-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100vw;
+    align-items: center;
+}
+
 table tr td {
     vertical-align: middle;
 }

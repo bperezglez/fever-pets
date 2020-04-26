@@ -29,4 +29,9 @@ describe('PaginationComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('onPaginationClick mock.url', () => {
+    const spy = spyOn(component.paginated, 'emit');
+    component.onPaginationClick('mock.url');
+    expect(spy).toHaveBeenCalledWith({link: 'mock.url'});
+  });
 });

@@ -1,7 +1,9 @@
 import { HttpClient, HttpResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { map, tap } from 'rxjs/operators';
+import { Pet } from './../models/pet.interface';
+
+import { map } from 'rxjs/operators';
 
 import { environment } from './../../../environments/environment';
 
@@ -13,7 +15,7 @@ const DEFAULT_API_LIMIT = 10;
 })
 export class PetsService {
   linksObj: any;
-  pets: Array<any>;
+  pets: Array<Pet>;
   tableHeaders: any;
 
   constructor(private http: HttpClient) {
@@ -24,25 +26,25 @@ export class PetsService {
     return [
       {
         name: 'photo_url',
-        title: 'Imagen',
+        title: 'Image',
         sortable: false,
         order: null,
       },
       {
         name: 'name',
-        title: 'Nombre',
+        title: 'Name',
         sortable: true,
         order: null,
       },
       {
         name: 'kind',
-        title: 'Tipo',
+        title: 'Kind',
         sortable: true,
         order: null,
       },
       {
         name: 'weight',
-        title: 'Peso',
+        title: 'Weight',
         sortable: true,
         order: null,
       },
@@ -54,7 +56,7 @@ export class PetsService {
       },
       {
         name: 'length',
-        title: 'Tamaño',
+        title: 'Length',
         sortable: true,
         order: null,
       },
@@ -139,9 +141,9 @@ export class PetsService {
     );
   }
 
-  calculatePetHealth(pet) {
-    const petHealth = pet.weight / (pet.height * pet.length);
-    if ((petHealth === 1 && pet.kind === 'cat') || (petHealth < 2 || petHealth > 5)) {
+  calculatePetHealth(pet): String {
+    const petHealth = Math.abs(pet.weight / (pet.height * pet.length));
+    if ((pet.number_of_lives === 1 && pet.kind === 'cat') || (petHealth < 2 || petHealth > 5)) {
       return 'unhealthy';
     }
     if (petHealth => 2 && petHealth <= 3) {

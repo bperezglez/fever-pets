@@ -22,4 +22,19 @@ describe('SortableComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('onSort desc', () => {
+    const spy = spyOn(component.sorted, 'emit');
+    component.order = 'desc';
+    component.name = 'name';
+    component.onSort();
+    expect(spy).toHaveBeenCalledWith({order: 'asc', name: 'name'});
+  });
+  it('onSort asc', () => {
+    const spy = spyOn(component.sorted, 'emit');
+    component.order = 'asc';
+    component.name = 'name';
+    component.onSort();
+    expect(spy).toHaveBeenCalledWith({order: 'desc', name: 'name'});
+  });
 });

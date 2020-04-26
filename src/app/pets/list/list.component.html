@@ -1,5 +1,8 @@
 <div class="row" *ngIf="pets && pets.length > 0">
-    <h2>Fever Pets</h2>
+    <header class="pet-list-header">
+        <h2>Fever Pets</h2>
+        <fever-pet-day></fever-pet-day>
+    </header>
     <table class="table table-hover">
         <thead>
             <tr>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PetsService } from '../services/pets.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { LoadingService } from 'src/app/shared/loading/loading.service';
 
 @Component({
   selector: 'app-list',
@@ -17,7 +18,8 @@ export class ListComponent implements OnInit {
   constructor(
     private petsService: PetsService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private loadingService: LoadingService
   ) {
     this.tableHeaders = this.petsService.getDefaultTableHeaders();
   }
@@ -30,6 +32,7 @@ export class ListComponent implements OnInit {
     });
   }
   getPets(options: any = this.route.snapshot.queryParams) {
+    this.loadingService.show();
     this.petsService
       .getPetsList(options)
       .subscribe(this.handleResponse.bind(this));
@@ -51,6 +54,7 @@ export class ListComponent implements OnInit {
     const { response, linkHeader } = res;
     this.pets = response;
     this.pagination = linkHeader;
+    this.loadingService.hide();
   }
 
   goToPetDetail(id) {

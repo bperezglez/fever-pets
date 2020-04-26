@@ -5,19 +5,21 @@
             <img [src]="pet.photo_url" alt="" class="img-thumbnail">
         </div>
         <dl class="dl-horizontal px-3">
-            <dt>Nombre</dt>
+            <dt>Name</dt>
             <dd>{{pet.name}}</dd>
-            <dt>Descripción</dt>
+            <dt>Description</dt>
             <dd>{{pet.description}}</dd>
-            <dt>Tipo</dt>
+            <dt>Kind</dt>
             <dd>{{pet.kind}}</dd>
-            <dt>Peso</dt>
+            <dt>Weight</dt>
             <dd>{{pet.weight}}</dd>
-            <dt>Altura</dt>
+            <dt>Height</dt>
             <dd>{{pet.height}}</dd>
-            <dt>Tamaño</dt>
+            <dt>Length</dt>
             <dd>{{pet.length}}</dd>
-            <dt>Salud</dt>
+            <dt *ngIf="pet.number_of_lives">Number of Lives</dt>
+            <dd *ngIf="pet.number_of_lives">{{pet.number_of_lives}}</dd>
+            <dt>Health</dt>
             <dd>{{pet.health}}</dd>
           </dl>
     </div>

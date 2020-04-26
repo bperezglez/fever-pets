@@ -163,11 +163,9 @@ describe('PetsService', () => {
       request.flush(petsMock, {headers});
     });
   });
-
   describe('@getPetById', () => {
-    it('call getPetById and health equal very healthy', () => {
+    it('call getPetById', () => {
       service.getPetById({id: 1}).subscribe(data => {
-        expect(data.health).toEqual('very healthy');
         expect(data).toEqual(petsMock[0]);
       });
       const request = httpMock.expectOne( `${environment.API_URL}pets/${1}`);
@@ -176,16 +174,5 @@ describe('PetsService', () => {
       request.flush(petsMock[0]);
     });
   });
-  describe('@getPetById', () => {
-    it('call getPetById and health equal unhealthy and kind cat, lives 1', () => {
-      service.getPetById({id: 4}).subscribe(data => {
-        expect(data.health).toEqual('unhealthy');
-        expect(data).toEqual(petsMock[3]);
-      });
-      const request = httpMock.expectOne( `${environment.API_URL}pets/${4}`);
 
-      expect(request.request.method).toBe('GET');
-      request.flush(petsMock[3]);
-    });
-  });
 });
